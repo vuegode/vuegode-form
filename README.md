@@ -117,4 +117,4 @@ MIT License
 
 ---
 
-Made with ❤️ by [Grigo Code](https://github.com/vuegode)
+Made with ❤️ by [Griego Code](https://github.com/grigode)
