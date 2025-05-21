@@ -17,7 +17,9 @@
     "build": "vite build && vue-tsc"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "peerDependencies": {
     "vue": "^3.2.37"
