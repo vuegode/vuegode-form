@@ -1,23 +1,55 @@
 {
-  "name": "vuegode-form",
-  "private": true,
+  "name": "@vuegode/form",
   "version": "0.0.0",
+  "description": "vuegode-form is a library of utilities and reusable components for forms in Vue 3. It provides reactive validations, error handling, and customizable UI components, making it easier to build scalable and consistent forms in your projects.",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+  "private": true,
+  "main": "./dist/vuegode-form.umd.js",
+  "module": "./dist/vuegode-form.es.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/vuegode-form.es.js",
+      "require": "./dist/vuegode-form.umd.js"
+    }
   },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.1.7",
-    "tailwindcss": "^4.1.7",
-    "vue": "^3.5.13"
+  "scripts": {
+    "build": "vite build && vue-tsc"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "vue": "^3.2.37"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.7",
+    "@types/node": "^22.15.21",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vue/tsconfig": "^0.7.0",
+    "tailwindcss": "^4.1.7",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",
     "vue-tsc": "^2.2.8"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vuegode/vuegode-form.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vuegode/vuegode-form/issues"
+  },
+  "homepage": "https://github.com/vuegode/vuegode-form#readme",
+  "keywords": [
+    "typescript",
+    "ui",
+    "vue",
+    "vue-components",
+    "form",
+    "form-validation",
+    "tailwindcss",
+    "zod"
+  ],
+  "author": "Griego Code",
+  "license": "MIT"
 }

@@ -1,7 +1,21 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "dist",
+    "emitDeclarationOnly": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "allowJs": false,
+    "jsx": "preserve",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["dist", "node_modules"]
 }
