@@ -6,10 +6,6 @@ export type ObjectData = Record<string, unknown>;
 export interface UseFormProps extends FormHTMLAttributes {
   disabled?: MaybeRefOrGetter<boolean>;
   disableHtmlValidation?: boolean;
-  submit?: (
-    data: ObjectData,
-    reset: (values?: ObjectData) => void
-  ) => MaybePromise<void>;
 }
 
 export const useForm = (props?: UseFormProps) => {
@@ -36,36 +32,36 @@ export const useForm = (props?: UseFormProps) => {
     }
   };
 
-  const handleSubmit = (payload: Event) => {
-    payload.preventDefault();
+  const handleSubmit = (
+    submit: (
+      data: ObjectData,
+      reset: (values?: ObjectData) => void
+    ) => MaybePromise<void>
+  ) => {
+    return async (payload: Event) => {
+      payload.preventDefault();
+      if (props?.disabled) return;
 
-    if (props?.disabled || !props?.submit) return;
+      const form = payload.target as HTMLFormElement;
+      if (!form) return;
 
-    const form = payload.target as HTMLFormElement;
-    if (!form) return;
+      const elements = Array.from(form.elements);
 
-    const elements = Array.from(form.elements);
+      const data: ObjectData = {};
 
-    const data: ObjectData = {};
-
-    for (let element of elements) {
-      if (
-        element instanceof HTMLInputElement ||
-        element instanceof HTMLSelectElement ||
-        element instanceof HTMLTextAreaElement ||
-        element instanceof HTMLButtonElement
-      ) {
-        data[element.name] = element.value;
+      for (let element of elements) {
+        if (
+          element instanceof HTMLInputElement ||
+          element instanceof HTMLSelectElement ||
+          element instanceof HTMLTextAreaElement ||
+          element instanceof HTMLButtonElement
+        ) {
+          data[element.name] = element.value;
+        }
       }
-    }
 
-    const submit = props.submit(data, reset);
-
-    if (submit instanceof Promise) {
-      submit.catch((error) => {
-        console.error("Form submission error:", error);
-      });
-    }
+      await submit(data, reset);
+    };
   };
 
   return {
@@ -73,7 +69,7 @@ export const useForm = (props?: UseFormProps) => {
       id,
       disabled: props?.disabled,
       novalidate: props?.disableHtmlValidation,
-      onSubmit: handleSubmit,
     },
+    handleSubmit,
   };
 };

@@ -1,23 +1,19 @@
 <script setup lang="ts">
-import type { ObjectData } from "../../src/composables/use-form";
 import { useForm } from "../../src/main";
 
-const submit = async (
-  data: ObjectData,
-  reset: (values?: ObjectData) => void
-) => {
-  console.log(data);
+const { formProps, handleSubmit } = useForm();
+
+const submit = handleSubmit((data, reset) => {
+  console.log("Form submitted with data:", data);
 
   reset({
-    url_input: "https://angelchavez-portfolio.vercel.app",
+    email_input: "infoangelchavez@gmail.com",
   });
-};
-
-const { formProps } = useForm({ submit });
+});
 </script>
 
 <template>
-  <form v-bind="formProps">
+  <form v-bind="formProps" @submit="submit">
     <input type="email" name="email_input" value="test@example.com" />
     <input type="file" name="file_input" />
     <input type="image" name="image_input" src="example.png" alt="Submit" />
